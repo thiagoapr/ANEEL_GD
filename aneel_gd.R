@@ -1,6 +1,3 @@
-rm(list=ls())
-setwd("//epe.lan/Arquivos/MeusDocs/thiago.rodrigues/My Documents/Dados/ANEEL/GD")
-
 library("httr")
 library("rvest")
 library("stringi")
@@ -42,7 +39,7 @@ for(i in 1:104) {
       # Header
       
       names(l) <- c("key", "Distribuidora",	"Codigo",	"Titular", "Classe", "Subgrupo",	"Modalidade",	"UC",
-                    "Município",	"UF",	"CEP",	"Conexao",	"Fonte",	"Potencia", "Modulos",	"Inversores",	"Area")
+                    "MunicÃ­pio",	"UF",	"CEP",	"Conexao",	"Fonte",	"Potencia", "Modulos",	"Inversores",	"Area")
 
       # Pool
       
@@ -50,7 +47,7 @@ for(i in 1:104) {
       
 }
 
-# Ajusta variáveis numérias
+# Ajusta variÃ¡veis numÃ©rias
 
 base <- base %>% mutate(UC = as.numeric(gsub(",", ".", gsub("\\.", "", UC))),
                         Potencia = as.numeric(gsub(",", ".", gsub("\\.", "", Potencia))),
@@ -58,10 +55,3 @@ base <- base %>% mutate(UC = as.numeric(gsub(",", ".", gsub("\\.", "", UC))),
                         Inversores = as.numeric(gsub(",", ".", gsub("\\.", "", Inversores))),
                         Area = as.numeric(gsub(",", ".", gsub("\\.", "", Area)))
 )
-
-
-# Salva base de dados
-
-#save(base, file = "aneel_gd.RData")
-
-
