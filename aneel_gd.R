@@ -1,3 +1,4 @@
+# Packages
 library("httr")
 library("rvest")
 library("stringi")
@@ -57,3 +58,6 @@ base <- base %>% mutate(UC = as.numeric(gsub(",", ".", gsub("\\.", "", UC))),
                         Inversores = as.numeric(gsub(",", ".", gsub("\\.", "", Inversores))),
                         Area = as.numeric(gsub(",", ".", gsub("\\.", "", Area)))
 )
+
+
+
