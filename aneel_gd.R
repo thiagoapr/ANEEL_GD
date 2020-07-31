@@ -3,13 +3,15 @@ library("rvest")
 library("stringi")
 library("tidyverse")
 
+pg <- 268 # número de páginas que serão lidas
+
 base <- NULL
 
-for(i in 1:104) {
+for(i in 1:pg) {
 
       # Read html
   
-      res <- httr::GET(url = paste0("http://www2.aneel.gov.br/scg/gd/gd_fonte_detalhe.asp?tipo=12&pagina=", 1))
+      res <- httr::GET(url = paste0("http://www2.aneel.gov.br/scg/gd/gd_fonte_detalhe.asp?tipo=12&pagina=", i))
       
       httr::stop_for_status(res)
       
@@ -26,8 +28,8 @@ for(i in 1:104) {
       
       # Exclui as primeiras 10 linhas
       
-      l <- data.frame(key = c(rep(0, 9), rep(seq(1, length(l)/16), each= 16)),
-                      Variavel = c(rep(0, 9), rep(seq(1, 16), times = length(l)/16)),
+      l <- data.frame(key = c(rep(0, 8), rep(seq(1, length(l)/16), each= 16)),
+                      Variavel = c(rep(0, 8), rep(seq(1, 16), times = length(l)/16)),
                       Dados = l)
       
       l <- l %>% filter(key != 0) %>% mutate(key = key,
