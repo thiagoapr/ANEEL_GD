@@ -4,7 +4,7 @@ library("rvest")
 library("stringi")
 library("tidyverse")
 
-pg <- 268 # número de páginas que serão lidas
+pg <- 365 # número de páginas que serão lidas
 
 base <- NULL
 
@@ -59,5 +59,19 @@ base <- base %>% mutate(UC = as.numeric(gsub(",", ".", gsub("\\.", "", UC))),
                         Area = as.numeric(gsub(",", ".", gsub("\\.", "", Area)))
 )
 
+
+# Ajusta variáveis
+
+base <- base %>% mutate(Modalidade = as.factor(Modalidade))
+levels(base$Modalidade) <- c("Autoconsumo remoto",
+                             "Condominios",
+                             "Geracao compartilhada",
+                             "Geracao na propria UC")
+
+
+base <- base %>% mutate(Classe = as.factor(Classe),
+                        Subgrupo = as.factor(Subgrupo))
+
+#save(base, file = "gd_aneel_dez2020.RData")
 
 
